@@ -5,11 +5,19 @@ export class UndividableError extends Error {
   }
 }
 
+const sum = (tasks: number[]) => {
+  return tasks.reduce((a, b) => a + b, 0);
+};
+
 export const assignTasks = (
   numChildren: number,
   tasks: number[],
 ): number[][] => {
   if (tasks.length < numChildren) {
+    throw new UndividableError();
+  }
+
+  if (sum(tasks) % numChildren != 0) {
     throw new UndividableError();
   }
 
