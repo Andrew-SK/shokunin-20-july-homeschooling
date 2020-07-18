@@ -34,3 +34,15 @@ Deno.test("3 children, 6 tasks divided evenly", () => {
 
   assertEquals(assignments, [[1, 1], [1, 1], [1, 1]]);
 });
+
+Deno.test("3 children, 5 unequal tasks", () => {
+  const assignments = assignTasks(3, [2, 1, 1, 1, 1]);
+
+  assertEquals(assignments, [[2], [1, 1], [1, 1]]);
+});
+
+Deno.test("3 children, all unequal tasks", () => {
+  const assignments = assignTasks(3, [9, 8, 7, 6, 5, 4, 3, 2, 1]);
+
+  assertEquals(assignments, [[9, 6], [8, 7], [5, 4, 3, 2, 1]]);
+});
