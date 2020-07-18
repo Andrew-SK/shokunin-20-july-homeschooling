@@ -28,3 +28,9 @@ Deno.test("Not assignable if the no. tasks < no. of children", () => {
     assignTasks(3, [1, 8]);
   }, UndividableError);
 });
+
+Deno.test("3 children, 6 tasks divided evenly", () => {
+  const assignments = assignTasks(3, [1, 1, 1, 1, 1, 1]);
+
+  assertEquals(assignments, [[1, 1], [1, 1], [1, 1]]);
+});

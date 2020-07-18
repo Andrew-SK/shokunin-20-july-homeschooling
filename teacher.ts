@@ -27,6 +27,28 @@ export const assignTasks = (
   if (shortcircuit(numChildren, tasks)) {
     throw new UndividableError();
   }
+  // Assuming sorted tasks. (TODO: actually sort)
+  let mutableTasks = [...tasks];
 
-  return [[1], [1], [1]];
+  const target = sum(tasks) / numChildren;
+
+  let assignments: number[][] = [[], [], []];
+  assignments.forEach((assignment) => {
+    let index = 0;
+
+    while (sum(assignment) < target && index < mutableTasks.length) {
+      const nextTask = mutableTasks[index];
+
+      if (sum([...assignment, nextTask]) <= target) {
+        // assign task to the current child.
+        assignment.push(nextTask);
+        mutableTasks.splice(index, 1);
+      } else {
+        // otherwise we move down the list.
+        index++;
+      }
+    }
+  });
+
+  return assignments;
 };
