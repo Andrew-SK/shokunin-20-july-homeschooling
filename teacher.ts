@@ -27,8 +27,11 @@ export const assignTasks = (
   if (shortcircuit(numChildren, tasks)) {
     throw new UndividableError();
   }
-  // Assuming sorted tasks. (TODO: actually sort)
+
   let mutableTasks = [...tasks];
+
+  // sort descending.
+  mutableTasks.sort((a, b) => b - a);
 
   const target = sum(tasks) / numChildren;
 
