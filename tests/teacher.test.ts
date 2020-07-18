@@ -22,3 +22,9 @@ Deno.test("it's not assignable if the sum of the tasks is not divisible by no. o
     assignTasks(3, [3, 1, 1]);
   }, UndividableError);
 });
+
+Deno.test("Not assignable if the no. tasks < no. of children", () => {
+  assertThrows(() => {
+    assignTasks(3, [1, 8]);
+  }, UndividableError);
+});
