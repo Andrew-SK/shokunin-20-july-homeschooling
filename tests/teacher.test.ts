@@ -52,3 +52,9 @@ Deno.test("unordered input", () => {
 
   assertEquals(assignments, [[2], [1, 1], [1, 1]]);
 });
+
+Deno.test("2 children", () => {
+  const assignments = assignTasks(2, [1, 1]);
+
+  assertEquals(assignments, [[1], [1]]);
+});

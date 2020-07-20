@@ -30,19 +30,23 @@ export const assignTasks = (
 
   let mutableTasks = [...tasks];
 
-  // sort descending.
+  // Sort descending.
   mutableTasks.sort((a, b) => b - a);
 
-  const target = sum(tasks) / numChildren;
+  const perChildTarget = sum(tasks) / numChildren;
 
-  let assignments: number[][] = [[], [], []];
+  // Build an array of empty lists
+  let assignments: number[][] = new Array(numChildren)
+    .fill(null)
+    .map((_) => []);
+
   assignments.forEach((assignment) => {
     let index = 0;
 
-    while (sum(assignment) < target && index < mutableTasks.length) {
+    while (sum(assignment) < perChildTarget && index < mutableTasks.length) {
       const nextTask = mutableTasks[index];
 
-      if (sum([...assignment, nextTask]) <= target) {
+      if (sum([...assignment, nextTask]) <= perChildTarget) {
         // assign task to the current child.
         assignment.push(nextTask);
         mutableTasks.splice(index, 1);
