@@ -55,6 +55,10 @@ export const assignTasks = (
         index++;
       }
     }
+
+    if (sum(assignment) !== perChildTarget) {
+      throw new UndividableError();
+    }
   });
 
   return assignments;

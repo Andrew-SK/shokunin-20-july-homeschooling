@@ -58,3 +58,9 @@ Deno.test("2 children", () => {
 
   assertEquals(assignments, [[1], [1]]);
 });
+
+Deno.test("3 children and 1, 2, 3 are not dividable", () => {
+  assertThrows(() => {
+    assignTasks(3, [1, 2, 3]);
+  }, UndividableError);
+});
