@@ -64,3 +64,9 @@ Deno.test("3 children and 1, 2, 3 are not dividable", () => {
     assignTasks(3, [1, 2, 3]);
   }, UndividableError);
 });
+
+Deno.test("check against sample input", () => {
+  const assignments = assignTasks(3, [5, 4, 1, 2, 7, 8, 3]);
+
+  assertEquals(assignments, [[8, 2], [7, 3], [5, 4, 1]]);
+});
